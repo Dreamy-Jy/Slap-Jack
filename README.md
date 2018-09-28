@@ -35,14 +35,18 @@ Unit testing (python's built in module)
 - raising the proper errors
 
 Write DOCSTRINGs for everything
-
+Spell check docstrings
 
 ### Card Distribution Method choice
-At first I wanted to distribute the cards one at a time to each player to better simulate the real why in which we usually.
-
+I had to choose between two methods: The rotating appending of distributed cards method, & all at once distribution.
+Choose the rotating distribution method, as it had the same time complexity as the other method, while being easier to
+implement and better simulates how an accutal deck of cards is most often distributed.
 
 ## Possible Improvements
 
 Threads to add a automated timing.
 
 Use of curses to better manage keyboard inputs.
+
+Improve code readablitly and type hinting by using custom types
+Better type hinting and 
