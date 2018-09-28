@@ -13,3 +13,36 @@ If the card on top of the pile is Jack of any kind, then the first player to sla
 If the top card is not a jack then all player who slaped the deck must place (if possible) 3 cards on the center pile.
 
 ## Implementation
+
+Use of deque in stead of a standard list:
+
+- This game involves alot of poping and appending, as card flow between player, the deque data structure implements these functions effeciently, helping to improve profromance.
+
+random.shuffle()
+
+Card Representation:
+- ('Type', 'position')
+    - Types: "spade","heart","clubs","diamond"
+    - Positions: "ace","2","3","4","5","6","7","8","9","10","jack","queen","king"
+    - Why: this notation allows use to 
+
+Type Hinting
+- to prevent errors
+    - ```stack: int = 1```
+
+Unit testing (python's built in module)
+- separt file
+- raising the proper errors
+
+Write DOCSTRINGs for everything
+
+
+### Card Distribution Method choice
+At first I wanted to distribute the cards one at a time to each player to better simulate the real why in which we usually.
+
+
+## Possible Improvements
+
+Threads to add a automated timing.
+
+Use of curses to better manage keyboard inputs.
