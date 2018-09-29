@@ -42,6 +42,16 @@ I had to choose between two methods: The rotating appending of distributed cards
 Choose the rotating distribution method, as it had the same time complexity as the other method, while being easier to
 implement and better simulates how an accutal deck of cards is most often distributed.
 
+### Checking Choice
+
+
+## Tooling
+
+### Code Style
+Linting
+Us of type hints
+- Static type checker mypy...
+
 ## Possible Improvements
 
 Threads to add a automated timing.
