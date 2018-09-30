@@ -12,6 +12,11 @@ If the card on top of the pile is Jack of any kind, then the first player to sla
 
 If the top card is not a jack then all player who slaped the deck must place (if possible) 3 cards on the center pile.
 
+## Rule
+- valid names
+- valid action keys
+- how to play
+
 ## Implementation
 
 Use of deque in stead of a standard list:
@@ -37,6 +42,9 @@ Unit testing (python's built in module)
 Write DOCSTRINGs for everything
 Spell check docstrings
 
+The choice to modify the user's input, and to have error handling without rasing any exceptions
+The use of inner methods, methods not used else where in code
+
 ### Card Distribution Method choice
 I had to choose between two methods: The rotating appending of distributed cards method, & all at once distribution.
 Choose the rotating distribution method, as it had the same time complexity as the other method, while being easier to
@@ -49,8 +57,17 @@ implement and better simulates how an accutal deck of cards is most often distri
 
 ### Code Style
 Linting
+- autopep8 
 Us of type hints
 - Static type checker mypy...
+not using list conprehensions
+
+usage of math-like <,>,<=,>= syntax
+- minimize conditionals
+- while not being too diffcult for users to use
+
+### This disicon to not Raise any errors, and handle exceptions silently
+- I felt that because this is designed to be a game for a general public rasing errors would be of little help to average user
 
 ## Possible Improvements
 
