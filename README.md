@@ -45,6 +45,8 @@ Spell check docstrings
 The choice to modify the user's input, and to have error handling without rasing any exceptions
 The use of inner methods, methods not used else where in code
 
+My usage of Globals
+
 ### Card Distribution Method choice
 I had to choose between two methods: The rotating appending of distributed cards method, & all at once distribution.
 Choose the rotating distribution method, as it had the same time complexity as the other method, while being easier to
@@ -66,14 +68,25 @@ usage of math-like <,>,<=,>= syntax
 - minimize conditionals
 - while not being too diffcult for users to use
 
-### This disicon to not Raise any errors, and handle exceptions silently
-- I felt that because this is designed to be a game for a general public rasing errors would be of little help to average user
+### How I decided wheither or not raise an error or handle silently, and handle exceptions silently
+- I felt that because this is designed to be a game for a general public rasing errors would be of little help to average user so exception were rasied sparingly and only in instances where a programmer might error and not the user.
+- If the user errored the program would rerun
 
 ## Possible Improvements
+
+seperate property list for players into single list or a player class
+
 
 Threads to add a automated timing.
 
 Use of curses to better manage keyboard inputs.
 
-Improve code readablitly and type hinting by using custom types
-Better type hinting and 
+Allow for the ablity to exit the game anytime by pressing a character, could true all input getting methods into
+
+### Code Base
+
+Use a player class as opposed to multipule list.
+
+### Game
+Allow for multipul rounds
+Allow for the ability to exit the game at anytime
