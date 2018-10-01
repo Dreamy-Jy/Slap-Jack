@@ -2,26 +2,22 @@ from typing import Deque, Tuple, List
 from collections import deque, OrderedDict
 from random import shuffle
 
-# TODO: give all decks a max length of 52 to catch errors
-# TODO: Consider adding "'"s around each use of a user's name
-# TODO: have consistent usage of '==', '!=', 'is', 'not' in your loops and conditionals
+# TODO make all loose values variables
 
 Card             = Tuple[str, str]
 Deck             = Deque[Card]
 Name_And_Control = Tuple[str, str]
 
-# TODO - Use indices for card tuple for readability
 SUITE:            int = 0
 POSITION:         int = 1
 MAX_PLAYERS:      int = 4
 MIN_PLAYERS:      int = 2
-PENALTY:          int = 3 # FIXME Reword
+PENALTY:          int = 3
 
-
-player_count_prompt:            str = "How many players do you want to play?"
+player_count_prompt:            str = "Welcome to Slap Jack!\n\nHow many people do you want to play?"
 get_name_prompt:                str = "Player {0} what would you like to be called?"
 get_unused_name_prompt:         str = "That name (\"{0}\") is all ready being used. Player {1} can you please enter a different name?"
-get_action_button_prompt:       str = "{0} what keyboard button would you like to be your slap button?"
+get_action_button_prompt:       str = "{0} what keyboard button would you like to be your slap button?\nPlease enter a single character!"
 get_valid_action_button_prompt: str = "Please enter a valid (any single character) keyboard character. The value you entered (\"{0}\") is either longer than a single character or already taken by another player. {1} can you please choose a different keyboard button?"
 slap_prompt:                    str = "You can slap the deck now."
 target_card:                    str = "jack"
@@ -73,12 +69,6 @@ def generate_player_decks(player_count: int) -> List[Deck]:
     return player_decks
 
 
-# TODO validate that the player_decks and the names line up in length and index matching
-# TODO make sure players can't have the same names and controls
-# TODO Defining rules for valid action buttons (a-z, A-Z, 0-9), make you inputs case insensative
-# TODO make name check case insensative
-# TODO Consider Auto uncapitalizing user names
-# TODO: Consider wrapping your conditional and error statement in methods of_valid_length(name) or is_not_being_used() inner functions
 def define_players_names_and_controls(number_of_players: int) -> List[Name_And_Control]:
     """This method allows player to set their names and slap button."""
 
@@ -87,12 +77,10 @@ def define_players_names_and_controls(number_of_players: int) -> List[Name_And_C
 
     names_and_controls: List[Name_And_Control] = []
 
-    # Describe the overall how this loop works
     for player in range(number_of_players):
 
         name: str = input(get_name_prompt.format(player +1))
 
-        # TODO make the validating loops functions, and the uniqueness checkers a function for both name and action_button.
         while len(name) < 0 or (name in [val[0] for val in names_and_controls]):
             name = input(get_unused_name_prompt.format(name, player +1))
         
@@ -105,7 +93,6 @@ def define_players_names_and_controls(number_of_players: int) -> List[Name_And_C
     
     return names_and_controls
 
-# TODO vaildate if all cards are valid 
 def deal_cards(player_decks: List[Deck], deck: Deck) -> None:
     """ This method distributs cards from a deck in abitary order between players.
     Cards are distributed such that player has close to the same amount of cards.
@@ -115,13 +102,15 @@ def deal_cards(player_decks: List[Deck], deck: Deck) -> None:
         player_decks[card %len(player_decks)].append(deck.pop())
 
 
-# TODO: add a timed print out of who's printing out what...
 def place_card(move_from_deck: Deck, move_to_deck: Deck) -> None:
     """This method allow you to movecards from the top of one deck to the top of another."""
     if len(move_from_deck) == 0:
+        print("No card was placed on the deck")
         return
     
     move_to_deck.appendleft(move_from_deck.popleft())
+
+    print("{0} {1} placed on the deck".format(move_to_deck[SUITE], move_to_deck[POSITION]))
 
 
 def make_pile_slappable(player_names_and_controls: List[Name_And_Control], player_decks: List[Deck], card_pile: Deck, player_debts: Deque[int]) -> None:
@@ -139,9 +128,11 @@ def make_pile_slappable(player_names_and_controls: List[Name_And_Control], playe
     if card_pile[0][POSITION] == target_card:
         winners_deck: Deck = player_decks[player_names_and_controls.index(slaps[0])] # type: ignore
         collect_pile(winners_deck, card_pile)
+        print("Player {0}, won the pile!".format(player_names_and_controls.index(slaps[0])))
         return
     else:
         for player in slaps:
+            print("Player {0}, put down 3 cards.".format(player_controls_list.index(player)))
             for _ in range(PENALTY):
                 player_debts.append(player_controls_list.index(player))
         print(player_debts)
@@ -189,7 +180,7 @@ def clear_player_debts(player_decks: List[Deck], card_pile: Deck, player_debts: 
 
         player_debts.popleft()
 
-def check_for_winner(player_decks: List[Deck]) -> None:
+def check_for_winner(player_decks: List[Deck]) -> int:
     """This method checks if any player has won the game, and returns their index. If noone won we return -1."""
 
     DECK_LIMIT: int = 52
@@ -199,9 +190,6 @@ def check_for_winner(player_decks: List[Deck]) -> None:
             return player
     
     return -1
-
-
-def endGame():
 
 if __name__ == '__main__':
     player_count:                                    int = get_player_count()
@@ -217,7 +205,8 @@ if __name__ == '__main__':
     game_round:  int = 0
     game_winner: int = -1
 
-    # Are there any conditions under which this could become infinite?
+    print("The game has started")
+
     while (game_winner < 0): 
         placing_player: int = game_round % player_count
         players_deck:  Deck = player_decks[placing_player]
