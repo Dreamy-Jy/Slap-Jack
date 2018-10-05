@@ -2,7 +2,8 @@ from typing import Deque, Tuple, List
 from collections import deque, OrderedDict
 from random import shuffle
 
-# TODO make all loose values variables
+# TODO make all magic values variables
+# TODO consider using inner functions, or some type of function hierarchy
 
 Card             = Tuple[str, str]
 Deck             = Deque[Card]
@@ -69,6 +70,7 @@ def generate_player_decks(player_count: int) -> List[Deck]:
     return player_decks
 
 
+# TODO: Consider wrapping your conditional and error statement in methods of_valid_length(name) or is_not_being_used() inner functions
 def define_players_names_and_controls(number_of_players: int) -> List[Name_And_Control]:
     """This method allows player to set their names and slap button."""
 
